@@ -3,9 +3,9 @@ import FadeIn from "./FadeIn";
 
 export default function About() {
     return (
-        <section id="about" className="relative py-32">
-            <div className="max-w-6xl mx-auto px-8">
-                <div className="grid lg:grid-cols-[1fr_1.2fr] gap-20 items-start">
+        <section id="about" className="relative py-20 sm:py-32">
+            <div className="max-w-6xl mx-auto px-6 sm:px-8">
+                <div className="grid lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-20 items-start">
                     {/* Left — label + heading */}
                     <FadeIn direction="left">
                         <div className="lg:sticky lg:top-28">

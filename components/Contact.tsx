@@ -3,9 +3,9 @@ import FadeIn from "./FadeIn";
 
 export default function Contact() {
     return (
-        <section id="contact" className="relative py-32">
-            <div className="max-w-6xl mx-auto px-8">
-                <div className="grid lg:grid-cols-[1fr_1fr] gap-20 items-start">
+        <section id="contact" className="relative py-20 sm:py-32">
+            <div className="max-w-6xl mx-auto px-6 sm:px-8">
+                <div className="grid lg:grid-cols-[1fr_1fr] gap-12 lg:gap-20 items-start">
                     {/* Left */}
                     <FadeIn direction="left">
                         <div className="flex items-center gap-3 mb-8">

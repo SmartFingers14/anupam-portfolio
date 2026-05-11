@@ -114,15 +114,15 @@ export default function Experience() {
     const job = jobs[active];
 
     return (
-        <section id="experience" className="relative py-32">
-            <div className="max-w-6xl mx-auto px-8">
+        <section id="experience" className="relative py-20 sm:py-32">
+            <div className="max-w-6xl mx-auto px-6 sm:px-8">
                 <FadeIn>
                     <div className="flex items-center gap-3 mb-4">
                         <span className="w-8 h-px bg-[#c9a96e]/50" />
                         <span className="text-[11px] font-semibold tracking-[0.25em] uppercase text-[#6b5e4e]">Experience</span>
                     </div>
                     <h2
-                        className="text-[clamp(2.5rem,5vw,4rem)] font-black leading-[1.05] tracking-[-0.02em] text-[#e8e0d0] mb-16"
+                        className="text-[clamp(2rem,6vw,4rem)] font-black leading-[1.05] tracking-[-0.02em] text-[#e8e0d0] mb-10 sm:mb-16"
                         style={{ fontFamily: "var(--font-serif)" }}
                     >
                         Where I&apos;ve Made{" "}
@@ -130,7 +130,69 @@ export default function Experience() {
                     </h2>
                 </FadeIn>
 
-                <div className="grid lg:grid-cols-[260px_1fr] gap-12">
+                {/* Mobile: accordion-style stacked list */}
+                <div className="lg:hidden space-y-0 border border-[#c9a96e]/10">
+                    {jobs.map((j, i) => (
+                        <div key={j.company} className="border-b border-[#c9a96e]/10 last:border-b-0">
+                            <button
+                                onClick={() => setActive(active === i ? -1 : i)}
+                                className="w-full text-left px-5 py-4 flex items-center justify-between gap-3"
+                            >
+                                <div>
+                                    <div className="flex items-center gap-2">
+                                        <span className="font-semibold text-[13px] text-[#e8e0d0]">{j.company}</span>
+                                        {j.current && <span className="w-1.5 h-1.5 rounded-full bg-[#c9a96e]" />}
+                                    </div>
+                                    <div className="text-[11px] text-[#6b5e4e] mt-0.5">{j.period}</div>
+                                </div>
+                                <svg
+                                    className={`w-4 h-4 text-[#6b5e4e] flex-shrink-0 transition-transform duration-200 ${active === i ? "rotate-180" : ""}`}
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <AnimatePresence>
+                                {active === i && (
+                                    <motion.div
+                                        initial={{ height: 0, opacity: 0 }}
+                                        animate={{ height: "auto", opacity: 1 }}
+                                        exit={{ height: 0, opacity: 0 }}
+                                        transition={{ duration: 0.25 }}
+                                        className="overflow-hidden"
+                                    >
+                                        <div className="px-5 pb-5">
+                                            <p className="text-[12px] text-[#c9a96e] font-medium mb-3">{j.role} · {j.location}</p>
+                                            <div className="flex flex-wrap gap-1.5 mb-4">
+                                                {j.tags.map((t) => (
+                                                    <span key={t} className="text-[10px] font-medium tracking-[0.05em] uppercase text-[#a89880] bg-[#c9a96e]/8 px-2.5 py-1">
+                                                        {t}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                            {j.highlight && (
+                                                <div className="border-l-2 border-[#c9a96e] pl-3 mb-4">
+                                                    <p className="text-[12px] text-[#c9a96e] leading-relaxed font-medium italic">{j.highlight}</p>
+                                                </div>
+                                            )}
+                                            <ul className="space-y-2.5">
+                                                {j.bullets.map((b, bi) => (
+                                                    <li key={bi} className="flex items-start gap-2.5 text-[13px] text-[#a89880] leading-relaxed font-light">
+                                                        <span className="mt-2 w-1 h-1 rounded-full bg-[#c9a96e]/50 flex-shrink-0" />
+                                                        {b}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Desktop: sidebar + panel */}
+                <div className="hidden lg:grid lg:grid-cols-[260px_1fr] gap-12">
                     {/* Sidebar */}
                     <FadeIn direction="left" className="flex flex-col">
                         {jobs.map((j, i) => (
@@ -144,9 +206,7 @@ export default function Experience() {
                             >
                                 <div className="flex items-center justify-between gap-2 mb-0.5">
                                     <span className="font-semibold text-[13px] leading-snug">{j.company}</span>
-                                    {j.current && (
-                                        <span className="w-1.5 h-1.5 rounded-full bg-[#c9a96e] flex-shrink-0" />
-                                    )}
+                                    {j.current && <span className="w-1.5 h-1.5 rounded-full bg-[#c9a96e] flex-shrink-0" />}
                                 </div>
                                 <div className="text-[11px] tracking-[0.05em] opacity-60">{j.period}</div>
                             </button>
@@ -157,48 +217,32 @@ export default function Experience() {
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={active}
-                            initial={{ opacity: 0, y: 12 }}
+                            initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -8 }}
-                            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                            exit={{ opacity: 0, y: -6 }}
+                            transition={{ duration: 0.3 }}
                         >
-                            {/* Header */}
                             <div className="flex flex-wrap items-start justify-between gap-4 mb-6 pb-6 border-b border-[#c9a96e]/10">
                                 <div>
-                                    <h3
-                                        className="text-2xl font-black text-[#e8e0d0] mb-1 leading-tight"
-                                        style={{ fontFamily: "var(--font-serif)" }}
-                                    >
+                                    <h3 className="text-2xl font-black text-[#e8e0d0] mb-1 leading-tight" style={{ fontFamily: "var(--font-serif)" }}>
                                         {job.company}
                                     </h3>
-                                    <p className="text-[13px] text-[#c9a96e] font-medium tracking-wide">
-                                        {job.role} · {job.location}
-                                    </p>
+                                    <p className="text-[13px] text-[#c9a96e] font-medium tracking-wide">{job.role} · {job.location}</p>
                                 </div>
                                 <span className="text-[11px] font-medium tracking-[0.08em] uppercase text-[#6b5e4e] border border-[#c9a96e]/15 px-3 py-1.5 whitespace-nowrap">
                                     {job.period}
                                 </span>
                             </div>
-
-                            {/* Tags */}
                             <div className="flex flex-wrap gap-2 mb-6">
                                 {job.tags.map((t) => (
-                                    <span key={t} className="text-[11px] font-medium tracking-[0.06em] uppercase text-[#a89880] bg-[#c9a96e]/8 px-3 py-1">
-                                        {t}
-                                    </span>
+                                    <span key={t} className="text-[11px] font-medium tracking-[0.06em] uppercase text-[#a89880] bg-[#c9a96e]/8 px-3 py-1">{t}</span>
                                 ))}
                             </div>
-
-                            {/* Highlight */}
                             {job.highlight && (
                                 <div className="border-l-2 border-[#c9a96e] pl-4 mb-6">
-                                    <p className="text-[13px] text-[#c9a96e] leading-relaxed font-medium italic">
-                                        {job.highlight}
-                                    </p>
+                                    <p className="text-[13px] text-[#c9a96e] leading-relaxed font-medium italic">{job.highlight}</p>
                                 </div>
                             )}
-
-                            {/* Bullets */}
                             <ul className="space-y-3">
                                 {job.bullets.map((b, i) => (
                                     <li key={i} className="flex items-start gap-3 text-[14px] text-[#a89880] leading-relaxed font-light">

@@ -18,8 +18,8 @@ const skills = [
 
 export default function Skills() {
     return (
-        <section id="skills" className="relative py-32 bg-[#0d0c0a]">
-            <div className="max-w-6xl mx-auto px-8">
+        <section id="skills" className="relative py-20 sm:py-32 bg-[#0d0c0a]">
+            <div className="max-w-6xl mx-auto px-6 sm:px-8">
                 <FadeIn>
                     <div className="flex items-center gap-3 mb-4">
                         <span className="w-8 h-px bg-[#c9a96e]/50" />
