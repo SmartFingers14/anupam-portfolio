@@ -66,23 +66,23 @@ export default function Hero() {
                         </motion.div>
 
                         {/* Name */}
-                        <div className="overflow-hidden mb-1">
+                        <div className="overflow-hidden mb-1 pb-3">
                             <motion.h1
                                 initial={{ y: "110%" }}
                                 animate={{ y: 0 }}
                                 transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                                className="text-[clamp(3.5rem,13vw,9rem)] font-black leading-[0.9] tracking-[-0.03em] text-[#e8e0d0]"
+                                className="text-[clamp(3.5rem,13vw,9rem)] font-black leading-[1.05] tracking-[-0.03em] text-[#e8e0d0]"
                                 style={{ fontFamily: "var(--font-serif)" }}
                             >
                                 Anupam
                             </motion.h1>
                         </div>
-                        <div className="overflow-hidden mb-8 sm:mb-10">
+                        <div className="overflow-hidden mb-8 sm:mb-10 pb-3">
                             <motion.h1
                                 initial={{ y: "110%" }}
                                 animate={{ y: 0 }}
                                 transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                                className="text-[clamp(3.5rem,13vw,9rem)] font-black leading-[0.9] tracking-[-0.03em] text-[#c9a96e]"
+                                className="text-[clamp(3.5rem,13vw,9rem)] font-black leading-[1.05] tracking-[-0.03em] text-[#c9a96e]"
                                 style={{ fontFamily: "var(--font-serif)" }}
                             >
                                 Bakshi
